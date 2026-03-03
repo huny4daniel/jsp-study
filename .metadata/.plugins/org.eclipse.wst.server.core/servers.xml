@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<servers>
+  <server auto-publish-setting="2" auto-publish-time="1" configuration-id="/Servers/Tomcat v9.0 Server at localhost-config" deployDir="wtpwebapps" hostname="localhost" id="Tomcat v9.0 Server at localhost" name="Tomcat v9.0 Server at localhost" runtime-id="Apache Tomcat v9.0" server-type="org.eclipse.jst.server.tomcat.90" server-type-id="org.eclipse.jst.server.tomcat.90" start-timeout="45" stop-timeout="15" testEnvironment="true" timestamp="10">
+    <list key="modules" value0="pro0303::org.eclipse.jst.jee.server:pro0303::jst.web::4.0" value1="pro0304::org.eclipse.jst.jee.server:pro0304::jst.web::4.0" value2="pro0310::org.eclipse.jst.jee.server:pro0310::jst.web::4.0" value3="pro0311::org.eclipse.jst.jee.server:pro0311::jst.web::4.0" value4="pro0317::org.eclipse.jst.jee.server:pro0317::jst.web::4.0" value5="pro0318::org.eclipse.jst.jee.server:pro0318::jst.web::4.0" value6="pro0324::org.eclipse.jst.jee.server:pro0324::jst.web::4.0" value7="pro0325::org.eclipse.jst.jee.server:pro0325::jst.web::4.0" value8="pro0331::org.eclipse.jst.jee.server:pro0331::jst.web::4.0" value9="pro0401::org.eclipse.jst.jee.server:pro0401::jst.web::4.0"/>
+  </server>
+</servers>
