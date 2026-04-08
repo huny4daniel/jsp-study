@@ -9,20 +9,21 @@
 </head>
 <body>
 <%
-//1. JDBC 드라이버 로딩
 Class.forName("com.mysql.cj.jdbc.Driver");
-Connection conn = null; Statement stmt = null; ResultSet rs = null;
+
+Connection conn = null; 
+Statement stmt = null; 
+ResultSet rs = null;
+
 try {
-    // 2. 데이터베이스 커넥션 생성
     conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/web", "root", "12345");
 
-    // 3. Statement 생성
     stmt = conn.createStatement();
-    // 4. 쿼리 실행
-    //rs = stmt.executeQuery("select * from MEMBER order by MEMBERID");
+
     String memberId = request.getParameter("memberId");
-    rs = stmt.executeQuery("select * from MEMBER where memberId = '" + memberId + "'");
-    // 5. 쿼리 실행 결과 출력
+
+    rs = stmt.executeQuery("select * from member where memberId = '" + memberId + "'");
+    
     while(rs.next()) {
         String id = rs.getString(1);
         String password = rs.getString(2);
@@ -30,13 +31,13 @@ try {
         String email = rs.getString(4);
         out.println(id + " : " + password + " : " + name + " : " + email + "<br>");
     }
-} catch(SQLException ex) {
+} 
+catch(SQLException ex) {
     ex.printStackTrace();
-} finally {
-    // 6. 사용한 Statement 종료
+} 
+finally {
     if (rs != null) try { rs.close(); } catch(SQLException ex) {}
     if (stmt != null) try { stmt.close(); } catch(SQLException ex) {}
-    // 7. 커넥션 종료
     if (conn != null) try { conn.close(); } catch(SQLException ex) {}
 }
 %>
