@@ -8,21 +8,28 @@
 <title>Insert title here</title>
 </head>
 <body>
-
 <%
+	request.setCharacterEncoding("UTF-8");
+
+	String target = request.getParameter("target");
+	String keyword = request.getParameter("keyword");
 	Connection conn = ConnectionProvider.getConnection();
 	List<Book> list = null;
+	
 	try {
 		BookDao dao = new BookDao();
-		list = dao.selectList(conn);
+		if (target != null && keyword != null) {
+			list = dao.selectLike(conn, target, keyword);
+		}
+		
 	}
-	catch(SQLException e){		
+	catch(SQLException e){	
 	}
+	if (list != null) {
 %>
 <table border="1">
 <tr>
-<th>아이디</th><th>도서명</th><th>저자</th><th>가격</th><th>출판일</th><th>이미지</th>
-<th>수정</th>
+<th>아이디</th><th>도서명</th><th>저자</th><th>가격</th><th>출판일</th>
 </tr>
 <%
 	for(Book book:list) {
@@ -35,11 +42,13 @@
 <img src="/pro0414/images/<%= book.getBookImage() %>" width="70" height="100">
 </a>
 </td>
-<td>
-<button type="button" onclick="location.href='/pro0414/update/input.jsp?bookId=<%= book.getBookId() %>'">수정</button>
-</td>
 </tr>
 <%	} %>
 </table>
+<%	} 
+	else {
+		out.print("검색 결과가 없습니다.");	
+	}
+%>
 </body>
 </html>

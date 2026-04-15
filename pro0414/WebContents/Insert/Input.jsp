@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>도서 정보 입력</title>
 </head>
 <body>
 도서 정보 입력: <br><hr><br>

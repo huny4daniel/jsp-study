@@ -67,7 +67,7 @@ public class BookDao {
 		List<Book> books = new ArrayList<Book>();
 		try {
 			pstmt = conn.prepareStatement
-			("select * from book where " +target +" like ?");
+			("select * from book where " + target + " like ?");
 			pstmt.setString(1, "%"+keyword+"%");
 			rs = pstmt.executeQuery();
 			while (rs.next()){
@@ -77,6 +77,7 @@ public class BookDao {
 				book.setAuthor(rs.getString(3));
 				book.setPrice(rs.getInt(4));
 				book.setPublishDate(rs.getTimestamp(5));
+				book.setBookImage(rs.getString(6));
 				books.add(book);
 			}
 		} catch (SQLException e){
@@ -89,9 +90,10 @@ public class BookDao {
 		return books;
 	}
 	
-	public void update(Connection conn, Book book) 
+	public int update(Connection conn, Book book) 
 			throws SQLException {
-		PreparedStatement pstmt=null; 
+		PreparedStatement pstmt=null;
+		int result = 0;
 		try {
 			pstmt = conn.prepareStatement
 			("update book set bookname=?,author=?,price=?, "
@@ -100,15 +102,16 @@ public class BookDao {
 			pstmt.setString(2, book.getAuthor());
 			pstmt.setInt(3, book.getPrice());
 			pstmt.setTimestamp(4, new Timestamp(book.getPublishDate().getTime()));
-			pstmt.setInt(5, book.getBookId());
-			pstmt.setString(6, book.getBookImage());
-			pstmt.executeUpdate(); 
+			pstmt.setString(5, book.getBookImage());
+			pstmt.setInt(6, book.getBookId());
+			result = pstmt.executeUpdate();
 		} catch (SQLException e){
 			e.printStackTrace();
 		} finally {
 			JdbcUtil.close(conn);
 			JdbcUtil.close(pstmt);
 		}
+		return result;
 	}
 	
 	public void deleteById(Connection conn, int bookId) 
