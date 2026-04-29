@@ -27,7 +27,7 @@
 	</c:forEach><br>
 </c:if>
 <c:if test="${m.sub!=null}">
-	취미:
+	부전공:
 	<c:forEach var="sub" items="${m.sub}">
 		${sub}:
 	</c:forEach><br>
