@@ -12,26 +12,19 @@
 <body>
 <%
 	int flowerId = Integer.parseInt(request.getParameter("flowerId"));
-	Flower flower = null;
 	Connection conn = ConnectionProvider.getConnection();
+	int count = 0;
 	try {
 		FlowerDao dao = new FlowerDao();
-		flower = dao.selectById(conn, flowerId);
+		count = dao.deleteById(conn, flowerId);
 	}
 	catch(SQLException e) {
 	}
 %>
-<c:set var="flower" value="<%=flower %>"/>
-<c:if test="${flower != null}">
-아이디: ${flower.flowerId}<br>
-꽃이름: ${flower.name}<br>
-원산지: ${flower.origin}<br>
-가격: ${flower.price}<br>
-등록일: <fmt:formatDate value="${flower.registerDate}" pattern="yyyy년 MM월 dd일"/><br><hr><br>
-<img src="/pro0428/images/${flower.image}" width="350" height="500"><br>
+<c:set var="count" value="<%=count %>"/>
+<c:if test="${count == 1}">
+	<jsp:forward page="../flowerlist/list.jsp"/>
 </c:if>
-
-<a href="catalog.jsp">카탈로그 보기</a>
 </body>
 </html>
 

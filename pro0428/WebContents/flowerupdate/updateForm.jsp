@@ -23,15 +23,15 @@
 %>
 <c:set var="flower" value="<%=flower %>"/>
 <c:if test="${flower != null}">
-아이디: ${flower.flowerId}<br>
-꽃이름: ${flower.name}<br>
-원산지: ${flower.origin}<br>
-가격: ${flower.price}<br>
-등록일: <fmt:formatDate value="${flower.registerDate}" pattern="yyyy년 MM월 dd일"/><br><hr><br>
-<img src="/pro0428/images/${flower.image}" width="350" height="500"><br>
+<form action="update.jsp" method="post">
+아이디: <input type="text" name="flowerId" value="${flower.flowerId}">
+꽃이름: <input type="text" name="name" value="${flower.name}">
+원산지: <input type="text" name="origin" value="${flower.origin}">
+가격: <input type="text" name="price" value="${flower.price}">
+이미지: <input type="text" name="image" value="${flower.image}">
+<input type="submit" value="수정">
+</form>
 </c:if>
-
-<a href="catalog.jsp">카탈로그 보기</a>
 </body>
 </html>
 

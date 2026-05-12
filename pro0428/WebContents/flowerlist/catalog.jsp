@@ -33,7 +33,7 @@
 <c:if test="${list != null}">
 <table border="1">
 <tr>
-<th>아이디</th><th>꽃이름</th><th>원산지</th><th>가격</th><th>등록일</th><th>이미지</th><th>수정</th><th>삭제</th>
+<th>아이디</th><th>꽃이름</th><th>원산지</th><th>가격</th><th>등록일</th><th>이미지</th><th>상세보기</th><th>구매하기</th>
 </tr>
 <c:forEach var="flower" items="${list}">
 <tr>
@@ -42,10 +42,10 @@
 <td>
 <a href="detail.jsp?flowerId=${flower.flowerId}"><img src="/pro0428/images/${flower.image}" width="70" height="100"></a></td>
 <td>
-	<button type="button" onclick="location.href='/pro0428/flowerupdate/updateForm.jsp?flowerId=${flower.flowerId}'" value="수정">수정</button>
+	<button type="button" onclick="location.href='detail.jsp?flowerId=${flower.flowerId}'" value="수정">상세보기</button>
 </td>
 <td>
-	<button type="button" onclick="location.href='/pro0428/flowerupdate/delete.jsp?flowerId=${flower.flowerId}'" value="삭제">삭제</button>
+	<button type="button" onclick="location.href='purchaseForm.jsp?flowerId=${flower.flowerId}'" value="삭제">구매하기</button>
 </td>
 </tr>
 </c:forEach>

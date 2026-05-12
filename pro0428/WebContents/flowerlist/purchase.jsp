@@ -12,25 +12,20 @@
 <body>
 <%
 	int flowerId = Integer.parseInt(request.getParameter("flowerId"));
-	Flower flower = null;
+    int amount = Integer.parseInt(request.getParameter("amount"));
+    int price = Integer.parseInt(request.getParameter("price"));
+    String userId = (String)session.getAttribute("LOGIN");
+    Purchase purchase = new Purchase(userId, flowerId, amount, price, amount * price, new java.util.Date());
+    
 	Connection conn = ConnectionProvider.getConnection();
 	try {
-		FlowerDao dao = new FlowerDao();
-		flower = dao.selectById(conn, flowerId);
+		PurchaseDao dao = new PurchaseDao();
+		dao.insert(conn, purchase);
 	}
 	catch(SQLException e) {
 	}
 %>
-<c:set var="flower" value="<%=flower %>"/>
-<c:if test="${flower != null}">
-아이디: ${flower.flowerId}<br>
-꽃이름: ${flower.name}<br>
-원산지: ${flower.origin}<br>
-가격: ${flower.price}<br>
-등록일: <fmt:formatDate value="${flower.registerDate}" pattern="yyyy년 MM월 dd일"/><br><hr><br>
-<img src="/pro0428/images/${flower.image}" width="350" height="500"><br>
-</c:if>
-
+<%= flowerId %>의 구매가 완료되었습니다.
 <a href="catalog.jsp">카탈로그 보기</a>
 </body>
 </html>
