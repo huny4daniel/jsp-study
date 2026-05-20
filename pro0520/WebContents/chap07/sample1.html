@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>객체 생성 및 활용</title></head>
+<body>
+<h3>객체 생성 및 활용</h3>
+<hr>
+<script>
+	var today = new Date(); 
+
+	document.write("현재 시간 : " + today.toGMTString() + "<br>");
+
+	var mystr= new String("자바스크립트 공부하기");
+	var address = new String("경기도 고양시 일산서구 일현로 97-11");
+	
+	document.write("mystr의 내용 : " + mystr + "<br>");
+	document.write("mystr의 길이 : " + mystr.length + "<br>");
+	
+	document.write("address의 내용 : " + address + "<br>");
+	document.write("address의 길이 : " + address.length + "<br>");
+</script>
+</body>
+</html>

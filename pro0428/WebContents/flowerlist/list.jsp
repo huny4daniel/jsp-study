@@ -45,7 +45,7 @@
 	<button type="button" onclick="location.href='/pro0428/flowerupdate/updateForm.jsp?flowerId=${flower.flowerId}'" value="수정">수정</button>
 </td>
 <td>
-	<button type="button" onclick="location.href='/pro0428/flowerupdate/delete.jsp?flowerId=${flower.flowerId}'" value="삭제">삭제</button>
+	<button type="button" onclick="location.href='/pro0428/flowerdelete/delete.jsp?flowerId=${flower.flowerId}'" value="삭제">삭제</button>
 </td>
 </tr>
 </c:forEach>
