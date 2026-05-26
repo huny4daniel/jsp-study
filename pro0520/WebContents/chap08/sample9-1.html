@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Insert title here</title>
+        <script type="text/javascript">
+
+function printClass() {
+    var classArray = document.getElementsByClassName("depart");
+    var result = document.getElementById("result");
+
+    var text = "";
+    for (var i = 0; i < classArray.length; i++) {
+        text += (classArray[i].innerHTML + ":");
+    }
+
+    result.innerHTML = text;
+}
+
+function printId(id) {
+    var result = document.getElementById("result");
+
+    result.innerHTML = id.innerHTML;
+}
+
+function printTag() {
+    var tagArray = document.getElementsByTagName("p");
+    var result = document.getElementById("result");
+
+    var text = "";
+    for (var i = 0; i < tagArray.length; i++) {
+        text += (tagArray[i].innerHTML + ":");
+    }
+
+    result.innerHTML = text;
+}
+
+        </script>
+    </head>
+    <body>
+        <div class="depart">경영학부</div><br>
+        <div class="depart">컴공</div><br>
+        <div class="depart">메카</div><br>
+        <div id="id01">김길동</div><br>
+        <div id="id02">손배상</div><br>
+        <p id="s01">안산</p><br>
+        <p id="s02">시흥</p><br>
+        <p id="result"></p>
+        <button onclick="printClass()">Div 클래스 출력</button>
+        <button onclick="printId(id01)">Div id 출력</button>
+        <button onclick="printTag()">태그 출력</button>
+    </body>
+</html>

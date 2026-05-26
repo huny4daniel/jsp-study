@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="utf-8">
+		<meta charset="UTF-8">
 		<title>document.getElementsByTagName()</title>
 		<script>
 
@@ -14,12 +14,20 @@ function change() {
 	}
 }
 
+function change1() {
+	var spanArray = document.getElementsByTagName("span");
+	for(var i=0; i<spanArray.length; i++) {
+		var span = spanArray[i];
+		span.innerHTML="<img src='../images/apple.jpg' width='30' height='30'>";
+	}
+}
+
 		</script>
 	</head>
 	<body>
-		<h3>
-			내가 좋아하는 과일
+		<h3>내가 좋아하는 과일
 			<button onclick="change()">누르세요</button>
+			<button onclick="change1()">이미지로 변경</button>
 		</h3>
 		<hr>
 		저는 빨간 <span>사과</span>를 좋아해서
