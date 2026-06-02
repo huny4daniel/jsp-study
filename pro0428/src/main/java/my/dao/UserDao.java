@@ -64,6 +64,31 @@ public class UserDao {
          return false;
    }
    
+   public boolean idCheck(Connection conn, String userId) 
+		   throws SQLException{
+	   PreparedStatement ps = null;
+	   ResultSet rs = null;
+	   boolean result = true;
+	   try{
+		   String sql = "select * from user where userId=?";
+		    ps = conn.prepareStatement(sql);
+		    ps.setString(1, userId);
+		    rs = ps.executeQuery();
+		    if(rs.next()){
+		    	result = false;
+		    }
+	   }
+	   catch(Exception e){
+		   e.printStackTrace();
+	   }
+	   finally{
+		   JdbcUtil.close(conn);
+		   JdbcUtil.close(ps);
+		   JdbcUtil.close(rs);
+	   }
+	   return result;
+	  }
+   
    public List<User> selectLike(Connection conn, String target, String keyword) 
          throws SQLException {
       PreparedStatement pstmt=null; 
