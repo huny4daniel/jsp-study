@@ -52,7 +52,7 @@ public class FlowerDao {
 		} catch (SQLException e){
 			e.printStackTrace();
 		} finally {
-			JdbcUtil.close(conn);
+			//JdbcUtil.close(conn);
 			JdbcUtil.close(pstmt);
 			JdbcUtil.close(rs);
 		}

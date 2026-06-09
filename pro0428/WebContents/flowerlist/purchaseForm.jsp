@@ -11,38 +11,42 @@
 </head>
 <body>
 <%
-	int flowerId = Integer.parseInt(request.getParameter("flowerId"));
-	Flower flower = null;
-	Connection conn = ConnectionProvider.getConnection();
-	try {
-		FlowerDao dao = new FlowerDao();
-		flower = dao.selectById(conn, flowerId);
-	}
-	catch(SQLException e) {
-	}
+   int flowerId=Integer.parseInt(request.getParameter("flowerId"));
+    Flower flower = null;
+    Connection conn = ConnectionProvider.getConnection();
+    try {
+        FlowerDao dao = new FlowerDao();
+        flower = dao.selectById(conn,flowerId);
+    } catch(SQLException e) {}
 %>
-<c:set var="flower" value="<%=flower %>"/>
-<c:if test="${flower != null}">
+<c:set var="flower" value="<%= flower %>"/>
+<c:if test="${flower != null }">
 <form action="purchase.jsp" method="post">
-꽃아이디: <input type="text" name="flowerId" value="${flower.flowerId}">
-가격: <input type="text" name="price" value="${flower.price}">
-수량: <select name="amount">
-	<option value="1">1개</option>
-	<option value="2">2개</option>
-	<option value="3">3개</option>
-	<option value="4">4개</option>
+꽃아이디:<input type=text name="flowerId" value="${flower.flowerId}">
+가격:<input type=text name="price" value="${flower.price}">
+수량:<select name="amount">
+   <option value="1">1개</option>
+   <option value="2">2개</option>
+   <option value="3">3개</option>
+   <option value="4">4개</option>
 </select>
 <input type="submit" value="구매하기">
-</form> <br><hr><br>
-<img src="/pro0428/images/${flower.image}" width="100" height="130"><br>
-</c:if>
+<input type="button" onclick="putcart(form)" value="카트담기">
+</form><br><hr><br>
 
+
+<img src="../images/${flower.image}" width="350" height="500"><br>
+
+</c:if>
 <a href="catalog.jsp">카탈로그 보기</a>
+<script>
+
+function putcart(frm){
+   var amount = frm.amount.value.trim();
+   var flowerid = frm.flowerId.value.trim();
+   window.open("putCart.jsp?flowerId="+flowerid+"&amount="+amount,"","width=500, height=300");
+}
+</script>
+
 </body>
 </html>
-
-
-
-
-
-
