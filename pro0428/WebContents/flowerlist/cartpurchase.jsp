@@ -30,6 +30,7 @@
 		    purchase = new Purchase(userId, flowerId, amount, flower.getPrice(), amount * flower.getPrice(), new java.util.Date());
 		    
 		    dao.insert(conn, purchase);
+		    fdao.updateFav(conn, flowerId);
 		}
 	}
 	catch(SQLException e) {

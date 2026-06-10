@@ -18,7 +18,7 @@
 	String origin = multi.getParameter("origin");
 	int price = Integer.parseInt(multi.getParameter("price"));
 	String image = multi.getFilesystemName("imageFile");
-	Flower flower = new Flower(0,name,origin,price,new java.util.Date(),image);
+	Flower flower = new Flower(0,name,origin,price,new java.util.Date(),image,0);
 	
 	Connection conn = ConnectionProvider.getConnection();
 	try {

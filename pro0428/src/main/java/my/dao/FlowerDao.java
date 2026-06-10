@@ -14,13 +14,14 @@ public class FlowerDao {
 		PreparedStatement pstmt=null; 
 		try {
 			pstmt = conn.prepareStatement
-			("insert into flower (name,origin,price,registerDate,image)"
-					+ " values(?,?,?,?,?)");
+			("insert into flower (name,origin,price,registerDate,image,fav)"
+					+ " values(?,?,?,?,?,?)");
 			pstmt.setString(1, flower.getName());
 			pstmt.setString(2, flower.getOrigin());
 			pstmt.setInt(3, flower.getPrice());
 			pstmt.setTimestamp(4, new Timestamp(flower.getRegisterDate().getTime()));
 			pstmt.setString(5, flower.getImage());
+			pstmt.setInt(6, flower.getFav());
 			pstmt.executeUpdate(); 
 		} catch (SQLException e){
 			e.printStackTrace();
@@ -48,6 +49,7 @@ public class FlowerDao {
 				flower.setPrice(rs.getInt(4));
 				flower.setRegisterDate(rs.getTimestamp(5));
 				flower.setImage(rs.getString(6));
+				flower.setFav(rs.getInt(7));
 			}
 		} catch (SQLException e){
 			e.printStackTrace();
@@ -78,6 +80,38 @@ public class FlowerDao {
 				flower.setPrice(rs.getInt(4));
 				flower.setRegisterDate(rs.getTimestamp(5));
 				flower.setImage(rs.getString(6));
+				flower.setFav(rs.getInt(7));
+				flowers.add(flower);
+			}
+		} catch (SQLException e){
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(conn);
+			JdbcUtil.close(pstmt);
+			JdbcUtil.close(rs);
+		}
+		return flowers;
+	}
+	
+	public List<Flower> selectFav(Connection conn, String target, String direct) 
+			throws SQLException {
+		PreparedStatement pstmt=null; 
+		ResultSet rs = null;
+		Flower flower = null; 
+		List<Flower> flowers = new ArrayList<Flower>();
+		try {
+			pstmt = conn.prepareStatement
+			("select * from flower order by " + target + " " + direct);
+			rs = pstmt.executeQuery();
+			while (rs.next()){
+				flower = new Flower(); 
+				flower.setFlowerId(rs.getInt(1));
+				flower.setName(rs.getString(2));
+				flower.setOrigin(rs.getString(3));
+				flower.setPrice(rs.getInt(4));
+				flower.setRegisterDate(rs.getTimestamp(5));
+				flower.setImage(rs.getString(6));
+				flower.setFav(rs.getInt(7));
 				flowers.add(flower);
 			}
 		} catch (SQLException e){
@@ -109,6 +143,24 @@ public class FlowerDao {
 			e.printStackTrace();
 		} finally {
 			JdbcUtil.close(conn);
+			JdbcUtil.close(pstmt);
+		}
+		return result;
+	}
+	
+	public int updateFav(Connection conn, int flowerId) 
+			throws SQLException {
+		PreparedStatement pstmt=null;
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement
+			("update flower set fav = fav + 1 where flowerId=?");
+			pstmt.setInt(1, flowerId);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e){
+			e.printStackTrace();
+		} finally {
+			//JdbcUtil.close(conn);
 			JdbcUtil.close(pstmt);
 		}
 		return result;
@@ -164,6 +216,7 @@ public class FlowerDao {
 				flower.setPrice(rs.getInt(4));
 				flower.setRegisterDate(rs.getTimestamp(5));
 				flower.setImage(rs.getString(6));
+				flower.setFav(rs.getInt(7));
 				flowerList.add(flower);
 			}
 		} finally {

@@ -9,11 +9,12 @@ public class Flower {
 	private int price;
 	private Date registerDate;
 	private String image;
+	private int fav;
 	
 	public Flower() {
 	}
 
-	public Flower(int flowerId, String name, String origin, int price, Date registerDate, String image) {
+	public Flower(int flowerId, String name, String origin, int price, Date registerDate, String image, int fav) {
 		super();
 		this.flowerId = flowerId;
 		this.name = name;
@@ -21,6 +22,7 @@ public class Flower {
 		this.price = price;
 		this.registerDate = registerDate;
 		this.image = image;
+		this.fav = fav;
 	}
 
 	public int getFlowerId() {
@@ -69,6 +71,14 @@ public class Flower {
 
 	public void setImage(String image) {
 		this.image = image;
+	}
+
+	public int getFav() {
+		return fav;
+	}
+
+	public void setFav(int fav) {
+		this.fav = fav;
 	}
 }
 

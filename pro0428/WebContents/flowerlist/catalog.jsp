@@ -15,14 +15,19 @@
 	request.setCharacterEncoding("utf-8");
 	String target = request.getParameter("target");
 	String keyword = request.getParameter("keyword");
+	String favTarget = request.getParameter("favTarget");
+	String direct = request.getParameter("direct");
 	Connection conn = ConnectionProvider.getConnection();
 	try {
 		FlowerDao dao = new FlowerDao();
-		if (target == null || keyword == null) {
-			list = dao.selectList(conn);	
+		if (target != null && keyword != null) {
+			list = dao.selectLike(conn, target, keyword);	
+		}
+		else if (favTarget != null && direct != null){
+			list = dao.selectFav(conn, favTarget, direct);
 		}
 		else {
-			list = dao.selectLike(conn, target, keyword);
+			list = dao.selectList(conn);
 		}
 	}
 	catch(SQLException e) {
@@ -58,6 +63,23 @@
 </select>
 검색어: <input type="text" name="keyword">
 <input type="submit" value="검색">
+</form>
+</td>
+</tr>
+<tr>
+<td colspan="8">
+<form action="" method="post">
+선호도: <select name="favTarget">
+	<option value="fav">선호도</option>
+	<option value="registerDate">출시일</option>
+	<option value="price">가격</option>
+	<option value="name">이름</option>
+</select>
+방향: <select name="direct">
+	<option value="desc">내림차순</option>
+	<option value="asc">오름차순</option>
+</select>
+<input type="submit" value="보기">
 </form>
 </td>
 </tr>

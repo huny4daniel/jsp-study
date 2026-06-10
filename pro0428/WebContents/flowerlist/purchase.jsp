@@ -20,9 +20,14 @@
 	Connection conn = ConnectionProvider.getConnection();
 	try {
 		PurchaseDao dao = new PurchaseDao();
+		FlowerDao fdao = new FlowerDao();
 		dao.insert(conn, purchase);
+		fdao.updateFav(conn, flowerId);
 	}
 	catch(SQLException e) {
+	}
+	finally {
+		JdbcUtil.close(conn);
 	}
 %>
 <%= flowerId %>의 구매가 완료되었습니다.
